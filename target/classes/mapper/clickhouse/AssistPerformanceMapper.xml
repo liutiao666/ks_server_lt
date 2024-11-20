@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmkj.mapper.clickhouse.AssistPerformanceDao">
+    <insert id="addOne" parameterType="com.zmkj.dto.AssistPerformanceDto">
+        insert into db_13.assist_performance (modelId, taskId, testNo, tdId, eventDay, eventDaytime, eventBatch, eventId, imageIndex)
+        values (#{modelId}, #{taskId}, #{testNo}, #{tdId}, #{eventDay}, #{eventDaytime}, #{eventBatch}, #{eventId}, #{imageIndex})
+    </insert>
+
+    <select id="searchAll" resultType="com.zmkj.entity.clickhouse.AssistPerformance">
+        select * from db_13.assist_performance
+    </select>
+</mapper>

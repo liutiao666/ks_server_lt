@@ -1,0 +1,29 @@
+{
+  "groups": [
+    {
+      "name": "",
+      "type": "com.zmkj.config.KafkaConfig",
+      "sourceType": "com.zmkj.config.KafkaConfig"
+    },
+    {
+      "name": "spring.datasource.clickhouse",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.zmkj.config.ClickHouseDataSourceConfig",
+      "sourceMethod": "clickhouseDataSource()"
+    },
+    {
+      "name": "spring.datasource.mysql",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.zmkj.config.MysqlDataSourceConfig",
+      "sourceMethod": "mysqlDataSource()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "properties",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "com.zmkj.config.KafkaConfig"
+    }
+  ],
+  "hints": []
+}
