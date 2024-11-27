@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.quartz.QuartzDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.zmkj.mapper.mysql", sqlSessionFactoryRef = "mysqlSqlSessionFactory")
 public class MysqlDataSourceConfig {
 
+    @QuartzDataSource
     @Bean("mysqlDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.mysql")
     public DataSource mysqlDataSource() {
