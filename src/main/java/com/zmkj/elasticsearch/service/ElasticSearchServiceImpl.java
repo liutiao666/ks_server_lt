@@ -16,12 +16,24 @@ public class ElasticSearchServiceImpl {
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     public void save(String index, Map<String, Object> document) {
+        // 检查 document 中是否有 id 键
+        if (!document.containsKey("id")) {
+            throw new IllegalArgumentException("Document must contain an 'id' field.");
+        }
+
+        String id = document.get("id").toString();
+
         IndexQuery indexQuery = new IndexQueryBuilder()
-                .withId(document.get("id").toString())
+                .withId(id)
                 .withObject(document)
                 .build();
 
         // 存储文档
-        elasticsearchRestTemplate.index(indexQuery, IndexCoordinates.of(index));
+        try {
+            elasticsearchRestTemplate.index(indexQuery, IndexCoordinates.of(index));
+        } catch (Exception e) {
+            // 处理异常
+            throw new RuntimeException("Failed to save document to index: " + index, e);
+        }
     }
 }
