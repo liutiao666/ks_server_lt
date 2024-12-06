@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmkj.mapper.clickhouse.WebSendTabDao">
+    <insert id="addOne">
+        INSERT INTO web_send_tab (envId, appName, appVer, records, logDate, tags)
+        VALUES
+        (#{envId}, #{appName}, #{appVer},#{records},
+        <!--<foreach collection="records" item="entry" index="key" open="map(" separator="," close=")">-->
+            <!--#{entry.key,jdbcType=VARCHAR}, #{entry.value,jdbcType=VARCHAR}-->
+        <!--</foreach>,-->
+        #{logDate},
+        <!--<foreach collection="tags" item="entry" index="key" open="map(" separator="," close=")">-->
+            <!--#{entry.key,jdbcType=VARCHAR}, #{entry.value,jdbcType=VARCHAR}-->
+        <!--</foreach>-->
+        #{tags}
+        )
+    </insert>
+
+    <select id="search" resultType="com.zmkj.entity.clickhouse.WebSendTab">
+        SELECT *
+        FROM web_send_tab
+        WHERE mapContains(records , #{recordKey}) = 1 AND mapContains(tags , #{tagKey}) = 1;
+    </select>
+</mapper>

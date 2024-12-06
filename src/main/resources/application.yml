@@ -50,6 +50,13 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
+  elasticsearch:
+    rest:
+      uris: https://116.63.107.133:8123
+      username: elastic
+      password: health
+
+
   quartz:
     job-store-type: jdbc
     jdbc:
@@ -61,7 +68,6 @@ spring:
             instanceName: perQuartzScheduler
             instanceId: AUTO
           jobStore:
-            dataSource: qDataSource
             class: org.quartz.impl.jdbcjobstore.JobStoreTX
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
             tablePrefix: QRTZ_
@@ -72,7 +78,10 @@ spring:
             threadCount: 10
             threadPriority: 5
 
+logging.level.org.mybatis: debug
+
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   config-location: classpath*:mapper/**/*.xml

@@ -39,7 +39,10 @@ public class QuartzSchedulerConfig {
         return TriggerBuilder.newTrigger()
                 .forJob(jobDetail)
                 .withIdentity("myTrigger")
-                .withSchedule(CronScheduleBuilder.cronSchedule("0/10 * * * * ?"))
+//                .withSchedule(CronScheduleBuilder.cronSchedule("0/30 * * * * ?"))
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                        .withIntervalInSeconds(5)
+                        .withRepeatCount(2))
                 .build();
     }
 

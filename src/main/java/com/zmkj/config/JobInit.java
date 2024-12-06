@@ -8,8 +8,8 @@ import org.springframework.context.annotation.DependsOn;
 
 import javax.annotation.PostConstruct;
 
-@Configuration
-@DependsOn("mysqlDataSource")
+//@Configuration
+//@DependsOn("mysqlDataSource")
 public class JobInit {
 
     @Autowired

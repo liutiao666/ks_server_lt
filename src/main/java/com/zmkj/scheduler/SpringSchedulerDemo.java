@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.Date;
 
-@Configuration
+//@Configuration
 public class SpringSchedulerDemo {
 
     @Scheduled(cron = "0/3 * * * * ?")

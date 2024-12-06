@@ -22,7 +22,7 @@ public class KafkaTopicConsumer {
     @Value("${spring.kafka.consumer.value-deserializer}")
     private String valueDeserializer;
 
-    @KafkaListener(topics = "kafka_test_topic", groupId = "my-group")
+//    @KafkaListener(topics = "kafka_test_topic", groupId = "my-group")
     public void listen(String msg) {
         String[] words = msg.split(",");
         log.info("消费的消息num：{}", words[7]);
