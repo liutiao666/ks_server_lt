@@ -1,13 +1,11 @@
 package com.zmkj;
 
-import org.apache.http.ssl.SSLContexts;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.net.ssl.*;
-import java.io.File;
 import java.security.cert.X509Certificate;
 
 @SpringBootApplication
@@ -27,9 +25,7 @@ public class KsServerApplication {
                     }
             };
 
-            SSLContext sc = SSLContexts.custom()
-                    .loadTrustMaterial(new File("D:\\myData\\ks_server_lt\\src\\main\\resources\\mykeystore.jks"), "123456".toCharArray())
-                    .build();
+            SSLContext sc = SSLContext.getInstance("TLS");
             sc.init(null, trustAllCerts, new java.security.SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 

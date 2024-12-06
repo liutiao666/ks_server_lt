@@ -85,3 +85,11 @@ mybatis:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   config-location: classpath*:mapper/**/*.xml
+
+# Elasticsearch配置
+es-config:
+  hostName: 116.63.107.133
+  port: 8123
+  scheme: https
+  username: elastic
+  password: health
