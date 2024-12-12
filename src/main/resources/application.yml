@@ -56,6 +56,15 @@ spring:
       username: elastic
       password: health
 
+  servlet:
+    minio:
+      access-key: ltRjXUd9EzlkorrHk1FC
+      secret-key: mFpXanjIRLPTt1Mjj4bDIsogz1u6QodPJmv2x7i8
+      url: http://localhost:9000
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+      file-size-threshold: 1024MB
 
   quartz:
     job-store-type: jdbc
