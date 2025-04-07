@@ -11,4 +11,8 @@ import java.util.List;
 public interface UserDao {
 
     List<User> searchUsers(String userName);
+
+    void batchInsert(List<User> users);
+
+    List<User> searchBatch(int pageSize, int currentNum);
 }

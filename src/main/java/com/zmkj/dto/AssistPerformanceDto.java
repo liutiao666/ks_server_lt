@@ -9,8 +9,8 @@ public class AssistPerformanceDto {
     private String testNo;
     private int tdId;
     private String eventDay;
-    private String eventDaytime;
-    private String eventBatch;
+    private long eventDaytime;
+    private int eventBatch;
     private int eventId;
     private String imageIndex;
 }

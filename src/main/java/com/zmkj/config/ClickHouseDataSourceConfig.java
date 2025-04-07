@@ -27,6 +27,7 @@ public class ClickHouseDataSourceConfig {
     public SqlSessionFactory clickhouseSqlSessionFactory(@Qualifier("clickhouseDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setTypeHandlersPackage("com.zmkj.config");
         sqlSessionFactoryBean.addMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/clickhouse/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }

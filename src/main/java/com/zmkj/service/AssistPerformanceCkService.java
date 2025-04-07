@@ -9,4 +9,6 @@ public interface AssistPerformanceCkService {
     void addAssistPerformance(AssistPerformanceDto assistPerformance);
 
     List<AssistPerformance> searchAll();
+
+    void insertBatch(int num);
 }

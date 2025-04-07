@@ -1,7 +1,11 @@
 package com.zmkj.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zmkj.config.KafkaConfig;
+import com.zmkj.entity.clickhouse.AssistPerformance;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.client.utils.DateUtils;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
@@ -11,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,12 +33,27 @@ public class KafkaServiceImpl {
 
     public void sendMsg(String topic, int num) {
         for (int i = 0; i < num; i++) {
-            LocalDateTime now = LocalDateTime.now();
-            // 定义日期时间格式
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            // 格式化当前时间
-            String dataStr = now.format(formatter);
-            kafkaTemplate.send(topic, "19,1,test_2022_0_000014,15," + dataStr + ",1661243258,0," + (i + 1) + ",\"0\",\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB,\"8454146.0000000\",\"810002\",未定义,\"04\",线阵CMOS4,\"04\",未定义,EB");
+            AssistPerformance assistPerformance = new AssistPerformance();
+            assistPerformance.setModelId(i);
+            assistPerformance.setTaskId(i);
+            assistPerformance.setTestNo("TestNo_" + i);
+            assistPerformance.setTdId(i);
+            assistPerformance.setEventDay(DateUtils.formatDate(new Date()));
+            assistPerformance.setEventDaytime(System.currentTimeMillis());
+            assistPerformance.setEventBatch(i);
+            assistPerformance.setEventId(i);
+            assistPerformance.setImageIndex("imageIndex_" + i);
+            Map<String, String> map = new HashMap<>();
+            for (int j = 0; j < 3; j++) {
+                map.put("extralMap_" + i + "_" + j, j + "");
+            }
+            assistPerformance.setExtralMap(map);
+            try {
+                String json = new ObjectMapper().writeValueAsString(assistPerformance);
+                kafkaTemplate.send(topic, json);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
         }
     }
 

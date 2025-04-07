@@ -14,4 +14,6 @@ public interface AssistPerformanceDao {
     void addOne(AssistPerformanceDto assistPerformance);
 
     List<AssistPerformance> searchAll();
+
+    void batchInsertCK(List<AssistPerformance> assistPerformances);
 }
